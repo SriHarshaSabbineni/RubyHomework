@@ -35,15 +35,15 @@ class TodosList
   end
 
   def overdue
-    TodosList.new(@todos.select { |todo| todo.overdue? })
+    TodosList.new(@todos.filter { |todo| todo.overdue? })
   end
 
   def due_today
-    TodosList.new(@todos.select { |todo| todo.due_today? })
+    TodosList.new(@todos.filter { |todo| todo.due_today? })
   end
 
   def due_later
-    TodosList.new(@todos.select { |todo| todo.due_later? })
+    TodosList.new(@todos.filter { |todo| todo.due_later? })
   end
 
   def add(todo)
