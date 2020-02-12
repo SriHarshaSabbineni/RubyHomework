@@ -21,11 +21,9 @@ class Todo
  end
 
  def to_displayable_string
-  if @completed
-    (@due_date != Date.today)? (return("[x] " + @text + " " + @due_date.to_s)) : (return("[x] " + @text + " "))
-  else
-    (@due_date != Date.today)? (return("[ ] " + @text + " " + @due_date.to_s)) : (return("[ ] " + @text + " "))
-  end
+  display_status = ((@completed)?("[x]"):("[]"))
+  display_date = (@due_date != Date.today)? (""):(@due_date.to_s)
+  "#{display_status} #{@text} #{display_date}"
  end
 end
 
