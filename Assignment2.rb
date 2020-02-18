@@ -1,30 +1,29 @@
 require "date"
 
 class Todo
+  def initialize(text, due_date, completed)
+    @text = text
+    @due_date = due_date
+    @completed = completed
+  end
 
- def initialize(text, due_date, completed)
-  @text = text
-  @due_date = due_date
-  @completed = completed
- end
+  def overdue?
+    @due_date < Date.today
+  end
 
- def overdue?
-  @due_date < Date.today
- end
+  def due_today?
+    @due_date == Date.today
+  end
 
- def due_today?
-  @due_date == Date.today
- end
+  def due_later?
+    @due_date > Date.today
+  end
 
- def due_later?
-  @due_date > Date.today
- end
-
- def to_displayable_string
-  display_status = ((@completed)?("[x]"):("[]"))
-  display_date = (@due_date != Date.today)? (""):(@due_date.to_s)
-  "#{display_status} #{@text} #{display_date}"
- end
+  def to_displayable_string
+    display_status = ((@completed) ? ("[x]") : ("[]"))
+    display_date = (@due_date != Date.today) ? ("") : (@due_date.to_s)
+    "#{display_status} #{@text} #{display_date}"
+  end
 end
 
 class TodosList
@@ -49,8 +48,8 @@ class TodosList
   end
 
   def to_displayable_list
-    list=[]
-    list= @todos.map { |todo| todo.to_displayable_string }
+    list = []
+    list = @todos.map { |todo| todo.to_displayable_string }
     return list.join("\n")
   end
 end
